@@ -4,23 +4,24 @@
 #include <math.h>
 #include <string.h>
 #include <cstdio>
+#include <cstdlib>
 #include <malloc.h>
 #include <map>
 #include "lwipopts.h"
 #include "pico/stdlib.h"
 #include "hardware/clocks.h"
 #include "hardware/pll.h"
-//Bluetooth
+/*Bluetooth
 #include "pico/cyw43_arch.h"
 #include "btstack_event.h"
 #include "btstack.h"
 #include "hal_led.h"
 #include "hal_tick.h"
 #include "hal_cpu.h"
-#include "btstack_config.h"
-#include "lwiperf.h"
+//#include "btstack_config.h"
+//#include "lwiperf.h"
 //#include "sm_pairing_central.h"
-//#include "Bluetoothh.h"
+//#include "Bluetoothh.h"*/
 
 #include "hardware/i2c.h"
 #include "hardware/spi.h"

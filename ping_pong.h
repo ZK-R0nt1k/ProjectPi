@@ -1,3 +1,5 @@
+#include <cstdlib>
+
 uint8_t ball_size = 3;
 uint8_t ball_speed = 2;
 uint8_t bot_desk_speed = 1;

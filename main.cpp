@@ -1,5 +1,4 @@
 #include "include.h"
-#include "pico/malloc.h"
 //Выводы клавиатуры
 #define SHIFT_REG_B 6
 #define SHIFT_REG_CLK 7
@@ -16,34 +15,11 @@
 
 #define STACK_SIZE 4096  
 
-extern uint8_t __StackTop; 
-extern uint8_t __StackLimit;
+
 uint16_t tick_time;
 uint64_t up_time;
 uint64_t up_time_1;
-int l = 30;
-int height = 40;
 
-bool set_hours = true;
-bool set_minutes = false;
-bool increase_length;
-bool increase_width;
-//Размер буфера
-/*#define BUF_WIDTH 128
-#define BUF_HEIGHT 64*/
-//int i;
-//uint16_t count_of_frames;
-//uint32_t count_of_time;
-extern uint8_t __StackLimit, __bss_end__; 
-/*void frame_pro_second(/*uint16_t tick_time_ms){
-    uint16_t FPS;
-    if ( time_us_32() > (count_of_time + 1000000)){
-        FPS = count_of_frames;
-        count_of_frames = 0;
-        count_of_time = time_us_32();
-          
-    }
-}*/
 
 static void packet_handler (uint8_t packet_type, uint16_t channel, const uint8_t *packet, uint16_t size);
 
@@ -59,8 +35,6 @@ void Update(){
 
 }
 
-int f;
-bool _f;
 float load;
 void FixedUpdate(){
         get_keyboard_stautus(); 
@@ -84,8 +58,8 @@ void FixedUpdate(){
         }
 }
 
-static void hci_packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *packet, uint16_t size);
-static void sm_packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *packet, uint16_t size);
+//static void hci_packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *packet, uint16_t size);
+//static void sm_packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *packet, uint16_t size);
 
 int main(){
     up_time = time_us_64();
@@ -103,10 +77,9 @@ int main(){
     //ST7789_fill_screen(0xfaaa);
     start_screen();
     init_ping_pong();
-    layers[0].add_shape(new Circle (64, 32, 30));
-    cyw43_arch_init();
-    l2cap_init();
-    sm_init();
+    //cyw43_arch_init();
+    //l2cap_init();
+    //sm_init();
 
     // setup ATT server
     //att_server_init(profile_data, NULL, NULL);
@@ -117,21 +90,19 @@ int main(){
     // register handler
     //hci_event_callback_registration.callback = &hci_packet_handler;
     //hci_add_event_handler(&hci_event_callback_registration);
-    hci_power_control(HCI_POWER_ON);
+    //hci_power_control(HCI_POWER_ON);
    // sm_event_callback_registration.callback = &sm_packet_handler;
    // sm_add_event_handler(&sm_event_callback_registration);
     //BluetoothInit();*/
 
     while (true) {
         Update();
-    
         if (time_us_64() - up_time >= tick_time) {
             uint64_t start_time = time_us_64(); 
             FixedUpdate();
             uint64_t end_time = time_us_64(); 
             uint64_t execution_time = end_time - start_time;
             load = ((float)execution_time / tick_time) * 100.0f;
-
             up_time = time_us_64();
         }
     }

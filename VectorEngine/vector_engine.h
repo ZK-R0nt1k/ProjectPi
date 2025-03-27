@@ -50,10 +50,11 @@ static void draw_line(int x0, int y0, int x1, int y1) {
     }
 }
 
-static void draw_triangle(uint16_t X0, uint16_t Y0, uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2){
+static void draw_quadrilateral(uint16_t X0, uint16_t Y0, uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2, uint16_t X3, uint16_t Y3){
     draw_line(X0, Y0, X1, Y1);
     draw_line(X1, Y1, X2, Y2);
-    draw_line(X2, Y2, X0, Y0);
+    draw_line(X2, Y2, X3, Y3);
+    draw_line(X3, Y3, X0, Y0);
 }
 
 static void draw_rectangle(uint16_t X0, uint16_t Y0, uint16_t X1, uint16_t Y1){
@@ -62,6 +63,13 @@ static void draw_rectangle(uint16_t X0, uint16_t Y0, uint16_t X1, uint16_t Y1){
     draw_line(X1, Y1, X1, Y0);
     draw_line(X0, Y0, X1, Y0);
 }
+
+static void draw_triangle(uint16_t X0, uint16_t Y0, uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2){
+    draw_line(X0, Y0, X1, Y1);
+    draw_line(X1, Y1, X2, Y2);
+    draw_line(X2, Y2, X0, Y0);
+}
+
 
 static void draw_circle(uint16_t X0, uint16_t Y0, uint16_t R){
     uint8_t Δy;

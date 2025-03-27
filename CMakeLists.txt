@@ -11,10 +11,13 @@ project(main)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(Drivers)
 include_directories(VectorEngine)
+include_directories(Bluetooth)
+include_directories(VexDraw)
 include_directories(
     ${PICO_SDK_PATH}/lib/btstack/src
     ${PICO_SDK_PATH}/lib/btstack/src/ble
 )
+
 
 pico_sdk_init()
 

@@ -54,6 +54,41 @@ struct Cursor : Shape {
     const char* get_name() const override { return "Cursor"; }  
 };
 
+struct Quadrilateral : Shape {
+    Point quadrilateral[4];
+    Quadrilateral(uint16_t _x0, uint16_t _y0, uint16_t _x1, uint16_t _y1, uint16_t _x2, uint16_t _y2, uint16_t _x3, uint16_t _y3) {
+        quadrilateral[0] = {_x0, _y0};
+        quadrilateral[1] = {_x1, _y1};
+        quadrilateral[2] = {_x2, _y2};
+        quadrilateral[3] = {_x3, _y3};
+    }
+
+    void draw() const override {
+        draw_quadrilateral(quadrilateral[0].x, quadrilateral[0].y, quadrilateral[1].x, quadrilateral[1].y, quadrilateral[2].x, quadrilateral[2].y, quadrilateral[3].x, quadrilateral[3].y);
+    }
+
+    void move_to(uint16_t new_x, uint16_t new_y) override{
+        int dx = new_x - quadrilateral[0].x;
+        int dy = new_y - quadrilateral[0].y;
+        for (int i = 0; i < 4; i++) {
+            quadrilateral[i].x += dx;
+            quadrilateral[i].y += dy;
+        }
+    }
+
+    bool is_inside(uint16_t x, uint16_t y) const {
+        if( x >= quadrilateral[0].x && x <= quadrilateral[1].x && y >= quadrilateral[0].y && y <= quadrilateral[1].y){
+            return true;
+        }
+        return false;
+    }
+
+    void fill() override{fill_shape(const_cast<Point*>(quadrilateral), 4);}
+
+    char const* get_name() const override { return "Quadrilateral"; }
+};
+
+
 struct Rectangle : Shape {
     Point rectangle[2];
 
@@ -65,6 +100,7 @@ struct Rectangle : Shape {
     void draw() const override {
         draw_rectangle(rectangle[0].x, rectangle[0].y, rectangle[1].x, rectangle[1].y);
     }
+
     void move_to(uint16_t new_x, uint16_t new_y) override{
         int dx = new_x - rectangle[0].x;
         int dy = new_y - rectangle[0].y;
