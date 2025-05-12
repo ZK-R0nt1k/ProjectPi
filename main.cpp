@@ -9,7 +9,7 @@
 #define TPS 60
 
 //I2C интерфейс
-#define I2C_SPEED 1200
+#define I2C_SPEED 1600
 #define BLUE_LED_PIN 11
 
 
@@ -38,7 +38,6 @@ void Update(){
 float load;
 void FixedUpdate(){
         get_keyboard_stautus(); 
-        layers[0].shapes[0]->draw();
         game();
         if (time_us_64() - up_time_1 >= 1000000){
             printf("🔹 up_time: %d s\n", (up_time_1 / 1000000));
@@ -54,8 +53,8 @@ void FixedUpdate(){
                     printf("Shape id: %d Name: %s\n", shape_id, shape->get_name());
                 }
             }
-            up_time_1 = time_us_64();
         }
+        up_time_1 = time_us_64();
 }
 
 //static void hci_packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *packet, uint16_t size);
@@ -77,7 +76,31 @@ int main(){
     //ST7789_fill_screen(0xfaaa);
     start_screen();
     init_ping_pong();
-    //cyw43_arch_init();
+    sleep_ms(1000);
+/*
+    cyw43_arch_init();
+    btstack_memory_init();
+
+    // select embedded run loop
+    btstack_run_loop_init(btstack_run_loop_embedded_get_instance());
+  
+    // enable logging
+    hci_dump_init(hci_dump_embedded_stdout_get_instance());
+  
+  
+    // init HCI
+    const btstack_uart_block_t * uart_driver = btstack_uart_block_embedded_instance();
+    const hci_transport_t * transport = hci_transport_h4_instance(uart_driver);
+    hci_init(transport, NULL);
+  
+    // setup example    
+    printf("Bluetooth init 0\n");
+    btstack_main(0, NULL);
+    printf("Bluetooth init\n");
+  
+    // go
+    btstack_run_loop_execute(); 
+   
     //l2cap_init();
     //sm_init();
 

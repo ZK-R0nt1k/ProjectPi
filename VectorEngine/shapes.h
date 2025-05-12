@@ -190,6 +190,7 @@ struct Ellipse : Shape {
 };
 
 struct Shape_Prefab{
+    Point position[2];
     virtual void draw() const = 0; 
     virtual void move_to(uint16_t new_x, uint16_t new_y) = 0;
     virtual void fill() = 0;
