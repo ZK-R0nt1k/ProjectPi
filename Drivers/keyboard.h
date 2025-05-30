@@ -69,12 +69,7 @@ void keyboard_set_all(bool status){
 }
 
 bool key_is_pressed(uint8_t key){
-    if (button_status[key - 1]){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return button_status[key - 1];
 }
 
 bool key_is_unpressed(uint8_t key){

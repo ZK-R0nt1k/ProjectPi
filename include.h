@@ -11,6 +11,7 @@
 #include "pico/stdlib.h"
 #include "hardware/clocks.h"
 #include "hardware/pll.h"
+#include "pico/malloc.h"
 /*//Bluetooth
 #include "pico/cyw43_arch.h"
 #include "btstack_config.h"
@@ -31,22 +32,13 @@
 #include "hardware/spi.h"
 #include "hardware/gpio.h"
 #include "hardware/pwm.h"
-#include "pico/malloc.h"
+
 //
 #include "ST7789_driver_commands.h"
 #include "ST7789_driver.h"
 
 #include "keyboard.h"
-#include "vector_engine.h"
-#include "SSD1306_driver.h"
-#include "shapes.h"
-#include "layers.h"
-#include "icons.h"
-#include "main_menu.h"
-#include "start_screen.h"
-#include "drawer_UI.h"
-#include "drawer.h"
-#include "roman_numbers.h"
+#include "include_vector.h"
 
 #include "timer.h"
 #include "ping_pong.h"

@@ -38,7 +38,7 @@ struct Layer {
 std::map<uint8_t, Layer> layers; 
 
 void init_layers(int num_layers) {
-    for(uint8_t i =  0; i < num_layers; i++){
+    for(uint8_t i = 0; i < num_layers; i++){
         layers[i] = Layer();
     }
 }
